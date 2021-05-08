@@ -1,0 +1,49 @@
+﻿
+@model IEnumerable<MaterialRequest.Models.Request>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Completed Request List</h2>
+        </div>
+    </div>
+    <br />
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-birdered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Part Number
+                    </th>
+                    <th>
+                        Time Needed
+                    </th>
+                    <th>
+                        Requested By
+                    </th>
+                    <th>
+                        Completed At
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var request in Model)
+                {
+                <tr>
+                    <td width="25%">@request.PartNumber</td>
+                    <td width="25%">@request.TimeNeeded.ToString("f")</td>
+                    <td width="25%">@request.RequestedBy</td>
+                    <td width="25%">@request.CompletedAt.ToString("f")</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>There are no completed requests at this time.</p>
+    }
+
+</div>

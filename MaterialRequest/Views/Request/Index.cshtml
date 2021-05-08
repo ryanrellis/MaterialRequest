@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MaterialRequest.Models.Request>
+
+<form method="post">
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">Material Request List</h2>
+            </div>
+            <div class="col-6 text-right">
+                <a asp-action="Create" class="btn btn-primary">Create new Request</a>
+            </div>
+        </div>
+        <br />
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-birdered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Part Number
+                        </th>
+                        <th>
+                            Location
+                        </th>
+                        <th>
+                            Time Needed
+                        </th>
+                        <th>
+                            Requested By
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var request in Model)
+                    {
+                    <tr>
+                        <td width="20%">@request.PartNumber</td>
+                        <td width="20%">@request.Location</td>
+                        <td width="20%">@request.TimeNeeded.ToShortTimeString()</td>
+                        <td width="20%">@request.RequestedBy</td>
+                        <td width="20%">
+                            <div class="col-6 text-right">
+
+                                <input type="submit" class="btn btn-success mx-1" asp-action="MarkComplete" asp-route-id="@request.Id" value="Mark Complete">
+
+                            </div>
+                        </td>
+
+                    </tr>
+                         }
+                    </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>There are no requests at this time.</p>
+                }
+
+        </div>
+    </form>
